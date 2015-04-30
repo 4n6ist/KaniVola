@@ -1,0 +1,2 @@
+# KaniVolatility
+メモリフォレンジック用ツールThe Volatility FrameworkをGUIで操作することを目的としたツールです。
