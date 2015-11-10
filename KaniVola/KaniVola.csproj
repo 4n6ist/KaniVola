@@ -8,11 +8,12 @@
     <ProjectGuid>{A428D0BE-9EE3-4D69-968A-7C350192642A}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>KaniVolatility</RootNamespace>
-    <AssemblyName>KaniVolatility</AssemblyName>
+    <RootNamespace>KaniVola</RootNamespace>
+    <AssemblyName>KaniVola</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkProfile />
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -24,7 +25,7 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>0.8.0.%2a</ApplicationVersion>
+    <ApplicationVersion>0.9.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -48,7 +49,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>jfk.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\kanivola.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -81,6 +88,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -108,12 +116,39 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Resources\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="jfk.ico" />
-    <Content Include="ji2forensics.ico" />
+    <Content Include="kanivola.ico" />
+    <Content Include="list\linux\process.txt" />
+    <Content Include="list\linux\process_memory.txt" />
+    <Content Include="list\linux\kernel_memory.txt" />
+    <Content Include="list\linux\malware.txt" />
+    <Content Include="list\linux\networking.txt" />
+    <Content Include="list\linux\systeminfo.txt" />
+    <Content Include="list\linux\misc.txt" />
+    <Content Include="list\osx\process.txt" />
+    <Content Include="list\osx\process_memory.txt" />
+    <Content Include="list\osx\kernel_memory.txt" />
+    <Content Include="list\osx\networking.txt" />
+    <Content Include="list\osx\malware.txt" />
+    <Content Include="list\osx\systeminfo.txt" />
+    <Content Include="list\osx\misc.txt" />
+    <Content Include="conf\profiles.txt" />
+    <Content Include="list\info.txt" />
+    <Content Include="conf\dumpcmd.txt" />
+    <Content Include="conf\batch_windows.txt" />
+    <Content Include="conf\batch_linux.txt" />
+    <Content Include="conf\batch_macosx.txt" />
+    <Content Include="list\windows\process_dll.txt" />
+    <Content Include="list\windows\process_memory.txt" />
+    <Content Include="list\windows\kernel_memory.txt" />
+    <Content Include="list\windows\networking.txt" />
+    <Content Include="list\windows\registry.txt" />
+    <Content Include="list\windows\filesystem.txt" />
+    <Content Include="list\windows\misc.txt" />
+    <Content Include="list\windows\malware.txt" />
+    <Content Include="list\windows\gui.txt" />
+    <Content Include="Resources\kanivola.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
