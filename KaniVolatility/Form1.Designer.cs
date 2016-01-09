@@ -70,7 +70,7 @@
 			this.lblOutput.Name = "lblOutput";
 			this.lblOutput.Size = new System.Drawing.Size(64, 12);
 			this.lblOutput.TabIndex = 0;
-			this.lblOutput.Text = "出力フォルダ";
+			this.lblOutput.Text = "输出文件夹";
 			// 
 			// lblInput
 			// 
@@ -79,7 +79,7 @@
 			this.lblInput.Name = "lblInput";
 			this.lblInput.Size = new System.Drawing.Size(63, 12);
 			this.lblInput.TabIndex = 1;
-			this.lblInput.Text = "対象ファイル";
+			this.lblInput.Text = "内存镜像";
 			// 
 			// txtBoxInput
 			// 
@@ -102,7 +102,7 @@
 			this.btnInputFile.Name = "btnInputFile";
 			this.btnInputFile.Size = new System.Drawing.Size(61, 19);
 			this.btnInputFile.TabIndex = 3;
-			this.btnInputFile.Text = "選択";
+			this.btnInputFile.Text = "选择";
 			this.btnInputFile.UseVisualStyleBackColor = true;
 			this.btnInputFile.Click += new System.EventHandler(this.buttonInputFile_Click);
 			// 
@@ -127,7 +127,7 @@
 			this.btnOutput.Name = "btnOutput";
 			this.btnOutput.Size = new System.Drawing.Size(61, 19);
 			this.btnOutput.TabIndex = 5;
-			this.btnOutput.Text = "選択";
+			this.btnOutput.Text = "选择";
 			this.btnOutput.UseVisualStyleBackColor = true;
 			this.btnOutput.Click += new System.EventHandler(this.buttonOutput_Click);
 			// 
@@ -138,7 +138,7 @@
 			this.btnRun.Name = "btnRun";
 			this.btnRun.Size = new System.Drawing.Size(61, 19);
 			this.btnRun.TabIndex = 9;
-			this.btnRun.Text = "実行";
+			this.btnRun.Text = "执行";
 			this.btnRun.UseVisualStyleBackColor = true;
 			this.btnRun.Click += new System.EventHandler(this.Run_Click);
 			// 
@@ -212,7 +212,7 @@
 			this.lblProfile.Name = "lblProfile";
 			this.lblProfile.Size = new System.Drawing.Size(57, 12);
 			this.lblProfile.TabIndex = 12;
-			this.lblProfile.Text = "プロファイル";
+			this.lblProfile.Text = "Profile";
 			// 
 			// lblCategory
 			// 
@@ -221,7 +221,7 @@
 			this.lblCategory.Name = "lblCategory";
 			this.lblCategory.Size = new System.Drawing.Size(39, 12);
 			this.lblCategory.TabIndex = 13;
-			this.lblCategory.Text = "カテゴリ";
+			this.lblCategory.Text = "Category";
 			// 
 			// cmbCategory
 			// 
@@ -242,7 +242,7 @@
 			this.lblCommand.Name = "lblCommand";
 			this.lblCommand.Size = new System.Drawing.Size(40, 12);
 			this.lblCommand.TabIndex = 15;
-			this.lblCommand.Text = "コマンド";
+			this.lblCommand.Text = "命令行";
 			// 
 			// cmbCommand
 			// 
@@ -273,7 +273,7 @@
 			this.lblRun.Name = "lblRun";
 			this.lblRun.Size = new System.Drawing.Size(64, 12);
 			this.lblRun.TabIndex = 20;
-			this.lblRun.Text = "実行コマンド";
+			this.lblRun.Text = "运行命令";
 			this.lblRun.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lblcom_MouseDoubleClick);
 			// 
 			// txtCommandLine
@@ -386,7 +386,7 @@
 			this.lblDOption.Name = "lblDOption";
 			this.lblDOption.Size = new System.Drawing.Size(153, 12);
 			this.lblDOption.TabIndex = 31;
-			this.lblDOption.Text = "(出力フォルダ配下のフォルダ名)";
+			this.lblDOption.Text = "（该文件夹下的输出的文件夹名称）";
 			// 
 			// chkStdOut
 			// 
@@ -407,7 +407,7 @@
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(48, 12);
 			this.label1.TabIndex = 33;
-			this.label1.Text = "オプション";
+			this.label1.Text = "选项";
 			// 
 			// Form1
 			// 
