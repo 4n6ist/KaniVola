@@ -249,6 +249,7 @@
             this.txtCommandLine.Name = "txtCommandLine";
             this.txtCommandLine.Size = new System.Drawing.Size(560, 19);
             this.txtCommandLine.TabIndex = 21;
+            this.txtCommandLine.Text = "--tz=Asia/Tokyo ";
             // 
             // lblProgName
             // 
@@ -366,6 +367,8 @@
             // chkJST
             // 
             this.chkJST.AutoSize = true;
+            this.chkJST.Checked = true;
+            this.chkJST.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkJST.Location = new System.Drawing.Point(352, 112);
             this.chkJST.Name = "chkJST";
             this.chkJST.Size = new System.Drawing.Size(342, 16);
@@ -420,7 +423,7 @@
             this.Controls.Add(this.lblOutput);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
-            this.Text = "KaniVola v0.9 (GUI for Volatility 2.5)";
+            this.Text = "KaniVola v0.9.1 (GUI for Volatility 2.5)";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

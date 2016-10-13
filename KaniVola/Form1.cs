@@ -16,6 +16,7 @@ namespace KaniVolatility
     {
         static public List<int> KnownId = new List<int>();   // プロセス停止チェック用
         static public string PrevInputFileName, PrevProfileName, PrevOutputDumpFolderName; //  対象ファイル、プロファイル、出力フォルダ(ダンプ用)の控え
+        //  起動時
         public Form1()
         {
             InitializeComponent();
@@ -25,6 +26,7 @@ namespace KaniVolatility
             btnCmdHelp.Enabled = false;
             btnRun.Enabled = false;
             btnOutput.Enabled = false;
+            chkPlugins.Enabled = false;
             if (!File.Exists("volatility.exe"))
             {
                 MessageBox.Show("volatilityプログラムが存在しません。\r\n\r\n"
@@ -78,12 +80,14 @@ namespace KaniVolatility
                 else
                     txtOutput.Text = Path.GetDirectoryName(txtInput.Text) + @"\" + Path.GetFileNameWithoutExtension(txtInput.Text) + "_Output";
 
-                cmbProfile.Enabled = true;
-                cmbCommand.SelectedIndex = 0; // imageinfoを選択状態にする
-                cmbCommand.Enabled = true;
-                btnOutput.Enabled = true;
-                btnRun.Enabled = true;
-
+                // pluginsチェックボックスがONならコントロール処理をスキップ
+                if(chkPlugins.Checked == false) {
+                    cmbProfile.Enabled = true;
+                    cmbCommand.SelectedIndex = 0; // imageinfoを選択状態にする
+                    cmbCommand.Enabled = true;
+                    btnOutput.Enabled = true;
+                    btnRun.Enabled = true;
+                }
                 // 実行コマンド欄への反映
                 if (PrevInputFileName == null)
                     txtCommandLine.Text = " -f \"" + txtInput.Text + "\" " + cmbCommand.SelectedItem;
@@ -92,9 +96,7 @@ namespace KaniVolatility
 
                 if (chkJST.Checked == true)
                     if (!txtCommandLine.Text.Contains("--tz=Asia/Tokyo"))
-                        txtCommandLine.Text += " --tz=Asia/Tokyo";
-                if (chkPlugins.Checked == true)
-                    txtCommandLine.Text = "--plugins=plugins " + txtCommandLine.Text;
+                        txtCommandLine.Text = "--tz=Asia/Tokyo " + txtCommandLine.Text;
 
                 PrevInputFileName = txtInput.Text;
             }
@@ -112,12 +114,15 @@ namespace KaniVolatility
                 else
                     txtOutput.Text = Path.GetDirectoryName(txtInput.Text) + @"\" + Path.GetFileNameWithoutExtension(txtInput.Text) + "_Output";
 
-                cmbProfile.Enabled = true;
-                cmbCommand.SelectedIndex = 0; // imageinfoを選択状態にする
-                cmbCommand.Enabled = true;
-                btnOutput.Enabled = true;
-                btnRun.Enabled = true;
+                // pluginsチェックボックスがONならコントロール処理をスキップ
 
+                if (chkPlugins.Checked == false) {
+                    cmbProfile.Enabled = true;
+                    cmbCommand.SelectedIndex = 0; // imageinfoを選択状態にする
+                    cmbCommand.Enabled = true;
+                    btnOutput.Enabled = true;
+                    btnRun.Enabled = true;
+                }
                 // 実行コマンド欄への反映
                 if (PrevInputFileName == null)
                     txtCommandLine.Text = " -f \"" + txtInput.Text + "\" " + cmbCommand.SelectedItem;
@@ -126,10 +131,7 @@ namespace KaniVolatility
 
                 if (chkJST.Checked == true)
                     if (!txtCommandLine.Text.Contains("--tz=Asia/Tokyo"))
-                        txtCommandLine.Text += " --tz=Asia/Tokyo";
-
-                if (chkPlugins.Checked == true)
-                    txtCommandLine.Text = "--plugins=plugins " + txtCommandLine.Text;
+                        txtCommandLine.Text = "--tz=Asia/Tokyo " + txtCommandLine.Text;
 
                 PrevInputFileName = txtInput.Text;
             }
@@ -150,10 +152,11 @@ namespace KaniVolatility
                     PrevOutputDumpFolderName = txtOutput.Text + @"\" + cmbCommand.SelectedItem;
                     if (chkJST.Checked == true)
                         if (!txtCommandLine.Text.Contains("--tz=Asia/Tokyo"))
-                            txtCommandLine.Text += " --tz=Asia/Tokyo";
+                            txtCommandLine.Text = "--tz=Asia/Tokyo " + txtCommandLine.Text;
 
                     if (chkPlugins.Checked == true)
-                        txtCommandLine.Text = "--plugins=plugins " + txtCommandLine.Text;
+                        if (!txtCommandLine.Text.Contains("--plugins=plugins"))
+                            txtCommandLine.Text = "--plugins=plugins " + txtCommandLine.Text;
                 }
             }
         }
@@ -176,9 +179,10 @@ namespace KaniVolatility
 
                         if (chkJST.Checked == true)
                             if (!txtCommandLine.Text.Contains("--tz=Asia/Tokyo"))
-                                txtCommandLine.Text += " --tz=Asia/Tokyo";
+                                txtCommandLine.Text = "--tz=Asia/Tokyo " + txtCommandLine.Text;
                         if (chkPlugins.Checked == true)
-                            txtCommandLine.Text = "--plugins=plugins " + txtCommandLine.Text;
+                            if (!txtCommandLine.Text.Contains("--plugins=plugins"))
+                                txtCommandLine.Text = "--plugins=plugins " + txtCommandLine.Text;
                     }
                 }
             }
@@ -204,6 +208,7 @@ namespace KaniVolatility
                   "プロファイルの追加", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
                 if (result == DialogResult.OK)
                 {
+                    chkPlugins.Checked = false;
                     chkPlugins.Enabled = false;
                     txtCommandLine.Text = "--plugins=profiles --info";
                     txtStdOutput.Text = "> volatility.exe " + txtCommandLine.Text + "\r\n";
@@ -219,6 +224,7 @@ namespace KaniVolatility
                 // プロファイルが新規または別OSからLinuxまたはMacに変更された場合はカテゴリリストを再作成
                 if (PrevProfileName != "Linux" || PrevProfileName != "Mac")
                 {
+                    chkPlugins.Checked = false;
                     chkPlugins.Enabled = false;
                     cmbCategory.Items.Clear();
                     cmbCategory.Items.AddRange(new object[] {
@@ -235,6 +241,7 @@ namespace KaniVolatility
                     txtCommandLine.Text = "--plugins=profiles --profile=" + cmbProfile.SelectedItem + " -f \"" + txtInput.Text + "\" " + cmbCommand.SelectedItem;
                     cmbCommand.Items.Clear();
                     cmbCommand.Text = "";
+                    cmbCategory.Enabled = true;
                 }
                 else
                 {
@@ -244,24 +251,25 @@ namespace KaniVolatility
             else // Windows用
             {
                 chkPlugins.Enabled = true;
-                cmbCategory.Items.Clear();
-                cmbCategory.Items.AddRange(new object[] {
-                    "プロセス/DLL",
-                    "プロセスメモリ",
-                    "カーネルメモリ/オブジェクト",
-                    "レジストリ",
-                    "ネットワーク",
-                    "ファイルシステム",
-                    "マルウェア",
-                    "Windows GUI",
-                    "その他",
-                    "イメージスキャン/変換",
-                    "バッチ処理"
-                });
+
 
                 // プロファイルが新規に選択された場合は現在の状態を維持しつつカテゴリリストを作成
                 if (PrevProfileName == null)
                 {
+                    cmbCategory.Items.Clear();
+                    cmbCategory.Items.AddRange(new object[] {
+                        "プロセス/DLL",
+                        "プロセスメモリ",
+                        "カーネルメモリ/オブジェクト",
+                        "レジストリ",
+                        "ネットワーク",
+                        "ファイルシステム",
+                        "マルウェア",
+                        "Windows GUI",
+                        "その他",
+                        "イメージスキャン/変換",
+                        "バッチ処理"
+                    });
                     cmbCategory.SelectedIndex = 9; // イメージスキャン/変換
                 }
                 // プロファイルが別OSからWinに変更された場合はカテゴリリストを再作成
@@ -273,18 +281,19 @@ namespace KaniVolatility
                 else
                 {
                     txtCommandLine.Text = txtCommandLine.Text.Replace(PrevProfileName, cmbProfile.Text);
-
                 }
-                cmbCategory.Enabled = true;
+
+                if (chkPlugins.Checked == false)
+                    cmbCategory.Enabled = true;
+
+                chkPlugins.Enabled = true;
                 PrevProfileName = cmbProfile.Text;
 
-                if (chkPlugins.Checked == true)
-                    txtCommandLine.Text = "--plugins=plugins " + txtCommandLine.Text;
             }
 
             if (chkJST.Checked == true)
                 if (!txtCommandLine.Text.Contains("--tz=Asia/Tokyo"))
-                    txtCommandLine.Text += " --tz=Asia/Tokyo";
+                    txtCommandLine.Text = "--tz=Asia/Tokyo " + txtCommandLine.Text;
         }
 
         // カテゴリ項目変更時
@@ -760,12 +769,12 @@ namespace KaniVolatility
 
             if (chkJST.Checked == true)
                 if (!txtCommandLine.Text.Contains("--tz=Asia/Tokyo"))
-                    txtCommandLine.Text += " --tz=Asia/Tokyo";
+                    txtCommandLine.Text = "--tz=Asia/Tokyo " + txtCommandLine.Text;
 
             btnRun.Enabled = true;
         }
 
-        // コマンド項目選択時
+        // コマンド項目変更時
         private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -819,7 +828,7 @@ namespace KaniVolatility
 
             if (chkJST.Checked == true)
                 if (!txtCommandLine.Text.Contains("--tz=Asia/Tokyo"))
-                    txtCommandLine.Text += " --tz=Asia/Tokyo";
+                    txtCommandLine.Text = "--tz=Asia/Tokyo " + txtCommandLine.Text;
 
             btnCmdHelp.Enabled = true;
         }
@@ -854,12 +863,13 @@ namespace KaniVolatility
         {
             if (chkJST.Checked == true)
             {
-                txtCommandLine.Text += " --tz=Asia/Tokyo";
+                //             txtCommandLine.Text += " --tz=Asia/Tokyo";
+                txtCommandLine.Text = "--tz=Asia/Tokyo " + txtCommandLine.Text;
             }
             else
             {
-                if (txtCommandLine.Text.Contains(" --tz=Asia/Tokyo") == true)
-                    txtCommandLine.Text = txtCommandLine.Text.Replace(" --tz=Asia/Tokyo", "");
+                if (txtCommandLine.Text.Contains("--tz=Asia/Tokyo") == true)
+                    txtCommandLine.Text = txtCommandLine.Text.Replace("--tz=Asia/Tokyo ", "");
             }
         }
 
@@ -868,21 +878,26 @@ namespace KaniVolatility
         {
             if (chkPlugins.Checked == true)
             {
-                txtCommandLine.Text = "--plugins=plugins " + txtCommandLine.Text;
+                txtCommandLine.Text = txtCommandLine.Text.Replace("-D \"" + txtOutput.Text + @"\" + txtDump.Text + "\"", "");
+                txtCommandLine.Text = txtCommandLine.Text.Replace(cmbCommand.Text, "");
                 cmbCategory.Enabled = false;
                 cmbCommand.Enabled = false;
+                txtDump.Enabled = false;
                 btnCmdHelp.Enabled = false;
+                txtCommandLine.Text = "--plugins=plugins " + txtCommandLine.Text;
             }
-            else
+            else // chkPlugins.Checked == false
             {
                 if (txtCommandLine.Text.Contains("--plugins=plugins ") == true)
-                    txtCommandLine.Text = txtCommandLine.Text.Replace("--plugins=plugins ", "");
-                if (cmbProfile.Enabled == true)
                 {
-                    cmbCategory.Enabled = true;
-                    cmbCommand.Enabled = true;
-                    btnCmdHelp.Enabled = true;
+                    txtCommandLine.Text = txtCommandLine.Text.Replace("--plugins=plugins ", "");
                 }
+                cmbCategory.Enabled = true;
+                cmbCommand.Enabled = true;
+                btnCmdHelp.Enabled = true;
+                if (txtDump.Text != "")
+                    txtDump.Enabled = true;
+                comboBox3_SelectedIndexChanged(sender, e);
             }
         }
 
@@ -1040,7 +1055,11 @@ namespace KaniVolatility
             // 自動保存有効時はコマンド名でファイルを保存
             if (chkAutoSave.Checked)
             {
-                string outFile = txtOutput.Text + @"\" + cmbCommand.Text + ".txt";
+                string outFile;
+                if(chkPlugins.Checked)
+                    outFile = txtOutput.Text + @"\plugins.txt";
+                else
+                    outFile = txtOutput.Text + @"\" + cmbCommand.Text + ".txt";
                 StreamWriter sw = new StreamWriter(outFile, false, System.Text.Encoding.GetEncoding("utf-8"));
                 sw.Write(e.Result);
                 sw.Close();
@@ -1052,9 +1071,11 @@ namespace KaniVolatility
             txtOutput.Enabled = true;
             btnOutput.Enabled = true;
             cmbProfile.Enabled = true;
-            cmbCategory.Enabled = true;
-            cmbCategory.SelectedIndex = 0;
-            cmbCommand.Enabled = true;
+            if (chkPlugins.Checked == false)
+            {
+                cmbCategory.Enabled = true;
+                cmbCommand.Enabled = true;
+            }
             chkAutoSave.Enabled = true;
             chkStdOut.Enabled = true;
             chkJST.Enabled = true;
@@ -1104,7 +1125,6 @@ namespace KaniVolatility
                 cmbProfile.Items.Clear();
                 string line = "";
                 StreamReader profFile = new StreamReader(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + @"\conf\profiles.txt", System.Text.Encoding.Default);
-                List<string> list = new List<string>(); // テスト後消す
 
                 while (profFile.Peek() >= 0)
                 {
@@ -1113,7 +1133,6 @@ namespace KaniVolatility
                         continue;
 
                     cmbProfile.Items.Add(line);
-                    list.Add(line); // テスト後消す
                 }
                 cmbProfile.Items.Add("Linux/Mac");
 

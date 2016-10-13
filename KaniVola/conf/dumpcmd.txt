@@ -19,7 +19,6 @@ linux_recover_filesystem
 linux_sk_buff_cache
 linux_tmpfs
 mac_adium
-mac_dump_maps
 mac_librarydump
 mac_memdump
 mac_moddump
