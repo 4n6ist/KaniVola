@@ -249,7 +249,7 @@
             this.txtCommandLine.Name = "txtCommandLine";
             this.txtCommandLine.Size = new System.Drawing.Size(560, 19);
             this.txtCommandLine.TabIndex = 21;
-            this.txtCommandLine.Text = "--tz=Asia/Tokyo ";
+            this.txtCommandLine.Text = " --tz=Asia/Tokyo ";
             // 
             // lblProgName
             // 

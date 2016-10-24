@@ -1,7 +1,6 @@
 agtidconfig
 antianalysis
 apifinder
-apihooks
 apihooksdeep
 apt17scan
 attributeht
@@ -30,12 +29,12 @@ plugxconfig
 plugxscan
 prefetchparser
 processbl
-rsakey
 schtasks
+servicebl
+servicediff
 shimcachemem
 shutdowntime
 ssdeepscan
 systeminfo
 trustrecords
 uninstallinfo
-usnparser

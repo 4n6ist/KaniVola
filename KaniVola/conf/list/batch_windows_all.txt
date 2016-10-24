@@ -1,5 +1,5 @@
 ﻿amcache
-//apihooks
+apihooks
 atoms
 atomscan
 auditpol
@@ -15,7 +15,7 @@ connscan
 consoles
 crashinfo
 deskscan
-//devicetree
+devicetree
 dlldump
 dlllist
 driverirp
@@ -44,11 +44,12 @@ iehistory
 impscan
 joblinks
 ldrmodules
+limeinfo
 lsadump
 malfind
 mbrparser
-//memdump
-//memmap
+memdump
+memmap
 messagehooks
 mftparser
 moddump
@@ -80,7 +81,7 @@ shutdowntime
 sockets
 sockscan
 ssdt
-//strings
+strings
 svcscan
 symlinkscan
 thrdscan
@@ -93,7 +94,7 @@ truecryptsummary
 unloadedmodules
 userassist
 userhandles
-//vaddump
+vaddump
 vadinfo
 vadtree
 vadwalk
@@ -104,4 +105,4 @@ win10cookie
 windows
 wintree
 wndscan
-//yarascan
+yarascan

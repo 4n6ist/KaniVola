@@ -95,8 +95,9 @@ namespace KaniVolatility
                     txtCommandLine.Text = txtCommandLine.Text.Replace(PrevInputFileName, txtInput.Text);
 
                 if (chkJST.Checked == true)
-                    if (!txtCommandLine.Text.Contains("--tz=Asia/Tokyo"))
-                        txtCommandLine.Text = "--tz=Asia/Tokyo " + txtCommandLine.Text;
+                    if (!txtCommandLine.Text.Contains(" --tz=Asia/Tokyo"))
+                        txtCommandLine.Text += " --tz=Asia/Tokyo";
+//                txtCommandLine.Text = "--tz=Asia/Tokyo " + txtCommandLine.Text;
 
                 PrevInputFileName = txtInput.Text;
             }
@@ -130,8 +131,9 @@ namespace KaniVolatility
                     txtCommandLine.Text = txtCommandLine.Text.Replace(PrevInputFileName, txtInput.Text);
 
                 if (chkJST.Checked == true)
-                    if (!txtCommandLine.Text.Contains("--tz=Asia/Tokyo"))
-                        txtCommandLine.Text = "--tz=Asia/Tokyo " + txtCommandLine.Text;
+                    if (!txtCommandLine.Text.Contains(" --tz=Asia/Tokyo"))
+                        txtCommandLine.Text += " --tz=Asia/Tokyo";
+//                txtCommandLine.Text = "--tz=Asia/Tokyo " + txtCommandLine.Text;
 
                 PrevInputFileName = txtInput.Text;
             }
@@ -151,8 +153,9 @@ namespace KaniVolatility
                     txtCommandLine.Text = txtCommandLine.Text.Replace(PrevOutputDumpFolderName, txtOutput.Text + @"\" + cmbCommand.SelectedItem);
                     PrevOutputDumpFolderName = txtOutput.Text + @"\" + cmbCommand.SelectedItem;
                     if (chkJST.Checked == true)
-                        if (!txtCommandLine.Text.Contains("--tz=Asia/Tokyo"))
-                            txtCommandLine.Text = "--tz=Asia/Tokyo " + txtCommandLine.Text;
+                        if (!txtCommandLine.Text.Contains(" --tz=Asia/Tokyo"))
+                            txtCommandLine.Text += " --tz=Asia/Tokyo";
+//                    txtCommandLine.Text = "--tz=Asia/Tokyo " + txtCommandLine.Text;
 
                     if (chkPlugins.Checked == true)
                         if (!txtCommandLine.Text.Contains("--plugins=plugins"))
@@ -178,8 +181,9 @@ namespace KaniVolatility
                         PrevOutputDumpFolderName = txtOutput.Text + @"\" + cmbCommand.SelectedItem;
 
                         if (chkJST.Checked == true)
-                            if (!txtCommandLine.Text.Contains("--tz=Asia/Tokyo"))
-                                txtCommandLine.Text = "--tz=Asia/Tokyo " + txtCommandLine.Text;
+                            if (!txtCommandLine.Text.Contains(" --tz=Asia/Tokyo"))
+                                txtCommandLine.Text += " --tz=Asia/Tokyo";
+//                        txtCommandLine.Text = "--tz=Asia/Tokyo " + txtCommandLine.Text;
                         if (chkPlugins.Checked == true)
                             if (!txtCommandLine.Text.Contains("--plugins=plugins"))
                                 txtCommandLine.Text = "--plugins=plugins " + txtCommandLine.Text;
@@ -292,8 +296,9 @@ namespace KaniVolatility
             }
 
             if (chkJST.Checked == true)
-                if (!txtCommandLine.Text.Contains("--tz=Asia/Tokyo"))
-                    txtCommandLine.Text = "--tz=Asia/Tokyo " + txtCommandLine.Text;
+                if (!txtCommandLine.Text.Contains(" --tz=Asia/Tokyo"))
+                    txtCommandLine.Text += " --tz=Asia/Tokyo";
+//            txtCommandLine.Text = "--tz=Asia/Tokyo " + txtCommandLine.Text;
         }
 
         // カテゴリ項目変更時
@@ -549,7 +554,6 @@ namespace KaniVolatility
                         "mac_contacts",
                         "mac_keychaindump",
                         "mac_notesapp",
-                        "mac_recover_filesystem",
                         "mac_strings",
                         "mac_threads",
                         "mac_threads_simple"
@@ -768,8 +772,9 @@ namespace KaniVolatility
                 txtCommandLine.Text = "--profile=" + cmbProfile.SelectedItem + " -f \"" + txtInput.Text + "\" " + cmbCommand.SelectedItem;
 
             if (chkJST.Checked == true)
-                if (!txtCommandLine.Text.Contains("--tz=Asia/Tokyo"))
-                    txtCommandLine.Text = "--tz=Asia/Tokyo " + txtCommandLine.Text;
+                if (!txtCommandLine.Text.Contains(" --tz=Asia/Tokyo"))
+                    txtCommandLine.Text += " --tz=Asia/Tokyo";
+//            txtCommandLine.Text = "--tz=Asia/Tokyo " + txtCommandLine.Text;
 
             btnRun.Enabled = true;
         }
@@ -827,8 +832,9 @@ namespace KaniVolatility
             }
 
             if (chkJST.Checked == true)
-                if (!txtCommandLine.Text.Contains("--tz=Asia/Tokyo"))
-                    txtCommandLine.Text = "--tz=Asia/Tokyo " + txtCommandLine.Text;
+                if (!txtCommandLine.Text.Contains(" --tz=Asia/Tokyo"))
+                    txtCommandLine.Text += " --tz=Asia/Tokyo";
+//            txtCommandLine.Text = "--tz=Asia/Tokyo " + txtCommandLine.Text;
 
             btnCmdHelp.Enabled = true;
         }
@@ -863,13 +869,13 @@ namespace KaniVolatility
         {
             if (chkJST.Checked == true)
             {
-                //             txtCommandLine.Text += " --tz=Asia/Tokyo";
-                txtCommandLine.Text = "--tz=Asia/Tokyo " + txtCommandLine.Text;
+                txtCommandLine.Text += " --tz=Asia/Tokyo";
+//                txtCommandLine.Text = "--tz=Asia/Tokyo " + txtCommandLine.Text;
             }
             else
             {
-                if (txtCommandLine.Text.Contains("--tz=Asia/Tokyo") == true)
-                    txtCommandLine.Text = txtCommandLine.Text.Replace("--tz=Asia/Tokyo ", "");
+                if (txtCommandLine.Text.Contains(" --tz=Asia/Tokyo") == true)
+                    txtCommandLine.Text = txtCommandLine.Text.Replace(" --tz=Asia/Tokyo", "");
             }
         }
 
