@@ -97,7 +97,6 @@ namespace KaniVolatility
                 if (chkJST.Checked == true)
                     if (!txtCommandLine.Text.Contains(" --tz=Asia/Tokyo"))
                         txtCommandLine.Text += " --tz=Asia/Tokyo";
-//                txtCommandLine.Text = "--tz=Asia/Tokyo " + txtCommandLine.Text;
 
                 PrevInputFileName = txtInput.Text;
             }
@@ -116,7 +115,6 @@ namespace KaniVolatility
                     txtOutput.Text = Path.GetDirectoryName(txtInput.Text) + @"\" + Path.GetFileNameWithoutExtension(txtInput.Text) + "_Output";
 
                 // pluginsチェックボックスがONならコントロール処理をスキップ
-
                 if (chkPlugins.Checked == false) {
                     cmbProfile.Enabled = true;
                     cmbCommand.SelectedIndex = 0; // imageinfoを選択状態にする
@@ -133,7 +131,6 @@ namespace KaniVolatility
                 if (chkJST.Checked == true)
                     if (!txtCommandLine.Text.Contains(" --tz=Asia/Tokyo"))
                         txtCommandLine.Text += " --tz=Asia/Tokyo";
-//                txtCommandLine.Text = "--tz=Asia/Tokyo " + txtCommandLine.Text;
 
                 PrevInputFileName = txtInput.Text;
             }
@@ -155,7 +152,6 @@ namespace KaniVolatility
                     if (chkJST.Checked == true)
                         if (!txtCommandLine.Text.Contains(" --tz=Asia/Tokyo"))
                             txtCommandLine.Text += " --tz=Asia/Tokyo";
-//                    txtCommandLine.Text = "--tz=Asia/Tokyo " + txtCommandLine.Text;
 
                     if (chkPlugins.Checked == true)
                         if (!txtCommandLine.Text.Contains("--plugins=plugins"))
@@ -183,7 +179,6 @@ namespace KaniVolatility
                         if (chkJST.Checked == true)
                             if (!txtCommandLine.Text.Contains(" --tz=Asia/Tokyo"))
                                 txtCommandLine.Text += " --tz=Asia/Tokyo";
-//                        txtCommandLine.Text = "--tz=Asia/Tokyo " + txtCommandLine.Text;
                         if (chkPlugins.Checked == true)
                             if (!txtCommandLine.Text.Contains("--plugins=plugins"))
                                 txtCommandLine.Text = "--plugins=plugins " + txtCommandLine.Text;
@@ -256,7 +251,6 @@ namespace KaniVolatility
             {
                 chkPlugins.Enabled = true;
 
-
                 // プロファイルが新規に選択された場合は現在の状態を維持しつつカテゴリリストを作成
                 if (PrevProfileName == null)
                 {
@@ -298,7 +292,6 @@ namespace KaniVolatility
             if (chkJST.Checked == true)
                 if (!txtCommandLine.Text.Contains(" --tz=Asia/Tokyo"))
                     txtCommandLine.Text += " --tz=Asia/Tokyo";
-//            txtCommandLine.Text = "--tz=Asia/Tokyo " + txtCommandLine.Text;
         }
 
         // カテゴリ項目変更時
@@ -774,7 +767,6 @@ namespace KaniVolatility
             if (chkJST.Checked == true)
                 if (!txtCommandLine.Text.Contains(" --tz=Asia/Tokyo"))
                     txtCommandLine.Text += " --tz=Asia/Tokyo";
-//            txtCommandLine.Text = "--tz=Asia/Tokyo " + txtCommandLine.Text;
 
             btnRun.Enabled = true;
         }
@@ -834,7 +826,6 @@ namespace KaniVolatility
             if (chkJST.Checked == true)
                 if (!txtCommandLine.Text.Contains(" --tz=Asia/Tokyo"))
                     txtCommandLine.Text += " --tz=Asia/Tokyo";
-//            txtCommandLine.Text = "--tz=Asia/Tokyo " + txtCommandLine.Text;
 
             btnCmdHelp.Enabled = true;
         }
@@ -870,7 +861,6 @@ namespace KaniVolatility
             if (chkJST.Checked == true)
             {
                 txtCommandLine.Text += " --tz=Asia/Tokyo";
-//                txtCommandLine.Text = "--tz=Asia/Tokyo " + txtCommandLine.Text;
             }
             else
             {
@@ -1039,7 +1029,6 @@ namespace KaniVolatility
         // バックグラウンドメイン処理終了時の後処理
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-
             progressBar1.Style = ProgressBarStyle.Blocks;
             progressBar1.Value = 0;
             btnRun.Text = "実行";
