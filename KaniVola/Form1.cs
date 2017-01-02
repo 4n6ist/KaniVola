@@ -30,7 +30,7 @@ namespace KaniVolatility
             if (!File.Exists("volatility.exe"))
             {
                 MessageBox.Show("volatilityプログラムが存在しません。\r\n\r\n"
-                  + "公式サイト(http://www.volatilityfoundation.org/)からWindowsプログラム(Volatility 2.5 Windows Standalone Executable)を入手してください。\r\n\r\n"
+                  + "公式サイト(http://www.volatilityfoundation.org/)からWindowsプログラム(Volatility 2.6 Windows Standalone Executable (x64))を入手してください。\r\n\r\n"
                   + "入手したファイルのファイル名をvolatility.exeに変更してからKaniVola.exeと同じフォルダに配置し、再度実行してください。",
                   "実行エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Environment.Exit(0);
@@ -327,6 +327,7 @@ namespace KaniVolatility
                 {
                     cmbCommand.Items.AddRange(new object[] {
                         "linux_pslist",
+                        "linux_psscan",
                         "linux_psaux",
                         "linux_pstree",
                         "linux_pslist_cache",
@@ -495,7 +496,13 @@ namespace KaniVolatility
                         "mac_lsmod_iokit",
                         "mac_lsmod_kext_map",
                         "mac_moddump",
-                        "mac_recover_filesystem"
+                        "mac_recover_filesystem",
+                        "mac_devfs",
+                        "mac_interesr_handlers",
+                        "mac_kernel_classes",
+                        "mac_kevents",
+                        "mac_timers",
+                        "mac_vfsevents"
                     });
                 }
                 else if ((string)cmbCategory.SelectedItem == "ネットワーク")
@@ -525,7 +532,8 @@ namespace KaniVolatility
                         "mac_check_mig_table",
                         "mac_check_syscall_shadow",
                         "mac_malfind",
-                        "mac_orphan_threads"
+                        "mac_orphan_threads",
+                        "mac_check_fop"
                     });
                 }
                 else if ((string)cmbCategory.SelectedItem == "システム情報")

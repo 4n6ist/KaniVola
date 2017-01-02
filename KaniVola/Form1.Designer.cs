@@ -149,12 +149,12 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtStdOutput.Font = new System.Drawing.Font("ＭＳ ゴシック", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txtStdOutput.Location = new System.Drawing.Point(12, 199);
+            this.txtStdOutput.Location = new System.Drawing.Point(12, 213);
             this.txtStdOutput.MaxLength = 1073741824;
             this.txtStdOutput.Multiline = true;
             this.txtStdOutput.Name = "txtStdOutput";
             this.txtStdOutput.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtStdOutput.Size = new System.Drawing.Size(760, 328);
+            this.txtStdOutput.Size = new System.Drawing.Size(760, 313);
             this.txtStdOutput.TabIndex = 10;
             this.txtStdOutput.WordWrap = false;
             // 
@@ -246,8 +246,9 @@
             this.txtCommandLine.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtCommandLine.Location = new System.Drawing.Point(145, 174);
+            this.txtCommandLine.Multiline = true;
             this.txtCommandLine.Name = "txtCommandLine";
-            this.txtCommandLine.Size = new System.Drawing.Size(560, 19);
+            this.txtCommandLine.Size = new System.Drawing.Size(560, 33);
             this.txtCommandLine.TabIndex = 21;
             this.txtCommandLine.Text = " --tz=Asia/Tokyo ";
             // 
@@ -288,7 +289,7 @@
             // 
             this.progressBar1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.progressBar1.Location = new System.Drawing.Point(12, 533);
+            this.progressBar1.Location = new System.Drawing.Point(12, 532);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(760, 23);
             this.progressBar1.TabIndex = 23;
@@ -393,7 +394,7 @@
             this.AcceptButton = this.btnRun;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 562);
+            this.ClientSize = new System.Drawing.Size(784, 561);
             this.Controls.Add(this.chkPlugins);
             this.Controls.Add(this.chkJST);
             this.Controls.Add(this.label1);
@@ -423,7 +424,7 @@
             this.Controls.Add(this.lblOutput);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
-            this.Text = "KaniVola v0.9.1 (GUI for Volatility 2.5)";
+            this.Text = "KaniVola v0.10.0 (GUI for Volatility 2.6)";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
