@@ -25,5 +25,12 @@ mac_moddump
 mac_notesapp
 mac_procdump
 mac_recover_filesystem
-attributeht
-malfinddeep
+hollowfind
+networkpackets
+psinfo
+//attributeht
+//bitlocker
+//malfinddeep
+//malfofind
+//schtasks
+//zbotscan

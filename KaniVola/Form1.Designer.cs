@@ -61,11 +61,11 @@
             this.process2 = new System.Diagnostics.Process();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.対象ファイルToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aff4ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.対象ファイルToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -140,7 +140,7 @@
             // btnRun
             // 
             this.btnRun.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRun.Location = new System.Drawing.Point(711, 196);
+            this.btnRun.Location = new System.Drawing.Point(711, 171);
             this.btnRun.Name = "btnRun";
             this.btnRun.Size = new System.Drawing.Size(61, 19);
             this.btnRun.TabIndex = 9;
@@ -154,12 +154,12 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtStdOutput.Font = new System.Drawing.Font("ＭＳ ゴシック", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txtStdOutput.Location = new System.Drawing.Point(12, 221);
+            this.txtStdOutput.Location = new System.Drawing.Point(12, 210);
             this.txtStdOutput.MaxLength = 1073741824;
             this.txtStdOutput.Multiline = true;
             this.txtStdOutput.Name = "txtStdOutput";
             this.txtStdOutput.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtStdOutput.Size = new System.Drawing.Size(760, 305);
+            this.txtStdOutput.Size = new System.Drawing.Size(760, 316);
             this.txtStdOutput.TabIndex = 10;
             this.txtStdOutput.WordWrap = false;
             // 
@@ -241,7 +241,7 @@
             // 
             this.txtCommandLine.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtCommandLine.Location = new System.Drawing.Point(78, 174);
+            this.txtCommandLine.Location = new System.Drawing.Point(78, 171);
             this.txtCommandLine.Multiline = true;
             this.txtCommandLine.Name = "txtCommandLine";
             this.txtCommandLine.Size = new System.Drawing.Size(626, 33);
@@ -251,7 +251,7 @@
             // lblProgName
             // 
             this.lblProgName.AutoSize = true;
-            this.lblProgName.Location = new System.Drawing.Point(3, 165);
+            this.lblProgName.Location = new System.Drawing.Point(3, 174);
             this.lblProgName.Name = "lblProgName";
             this.lblProgName.Size = new System.Drawing.Size(69, 12);
             this.lblProgName.TabIndex = 22;
@@ -342,9 +342,9 @@
             this.chkJST.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkJST.Location = new System.Drawing.Point(352, 129);
             this.chkJST.Name = "chkJST";
-            this.chkJST.Size = new System.Drawing.Size(342, 16);
+            this.chkJST.Size = new System.Drawing.Size(303, 16);
             this.chkJST.TabIndex = 37;
-            this.chkJST.Text = "タイムゾーンをAsia/Tokyo(UTC+0900)に設定 (--tz=Asia/Tokyo)";
+            this.chkJST.Text = "タイムゾーンをJST(UTC+0900)に設定 (--tz=Asia/Tokyo)";
             this.chkJST.UseVisualStyleBackColor = true;
             this.chkJST.Click += new System.EventHandler(this.chkJST_Click);
             // 
@@ -392,6 +392,13 @@
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
             this.fileToolStripMenuItem.Text = "ファイル";
             // 
+            // 対象ファイルToolStripMenuItem
+            // 
+            this.対象ファイルToolStripMenuItem.Name = "対象ファイルToolStripMenuItem";
+            this.対象ファイルToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
+            this.対象ファイルToolStripMenuItem.Text = "対象ファイル";
+            this.対象ファイルToolStripMenuItem.Click += new System.EventHandler(this.buttonInputFile_Click);
+            // 
             // toolToolStripMenuItem
             // 
             this.toolToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -403,7 +410,7 @@
             // aff4ToolStripMenuItem
             // 
             this.aff4ToolStripMenuItem.Name = "aff4ToolStripMenuItem";
-            this.aff4ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.aff4ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.aff4ToolStripMenuItem.Text = "AFF4変換";
             this.aff4ToolStripMenuItem.Click += new System.EventHandler(this.aff4ToolStripMenuItem_Click);
             // 
@@ -418,16 +425,9 @@
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.aboutToolStripMenuItem.Text = "バージョン情報";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
-            // 
-            // 対象ファイルToolStripMenuItem
-            // 
-            this.対象ファイルToolStripMenuItem.Name = "対象ファイルToolStripMenuItem";
-            this.対象ファイルToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.対象ファイルToolStripMenuItem.Text = "対象ファイル";
-            this.対象ファイルToolStripMenuItem.Click += new System.EventHandler(this.buttonInputFile_Click);
             // 
             // Form1
             // 
