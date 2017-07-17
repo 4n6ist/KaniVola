@@ -22,9 +22,8 @@ netscan
 procdump
 pslist
 psscan
-pstree
+pstree -v
 psxview
-screenshot
 servicediff
 sessions
 shellbags
@@ -83,6 +82,7 @@ win10cookie
 //printkey
 //privs//qemuinfo
 //raw2dmp//sockets
+//screenshot
 //sockscan
 //strings
 //thrdscan
@@ -104,13 +104,11 @@ win10cookie
 //wndscan
 //yarascan
 agtidconfig
-apihooksdeep
 apt17scan
 attributeht
 autoruns
 bitlocker
 bitlocker10
-callstacks
 darkcometconfigdump
 derusbiconfig
 directoryenumerator
@@ -118,7 +116,7 @@ dyrescan
 exhistory
 facebookcontacts
 facebookgrabinfo
-facebookmessges
+facebookmessages
 firefoxcookies
 firefoxdownloads
 firefoxhistory
@@ -147,14 +145,12 @@ pdblist
 plugxconfig
 plugxscan
 prefetchparser
-//processbl
 profilescan
 psinfo
 redleavesconfig
 redleavesscan
 schtasks
 sdbscanner
-//servicebl
 shimcachemem
 systeminfo
 uninstallinfo
@@ -162,3 +158,8 @@ usbstor
 usnjrnl
 usnparser
 zbotscan
+//apihooksdeep
+//callstacks
+//driverbl
+//processbl
+//servicebl

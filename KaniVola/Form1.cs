@@ -15,7 +15,7 @@ namespace KaniVolatility
     public partial class Form1 : Form
     {
         static public List<int> KnownId = new List<int>();   // プロセス停止チェック用
-        static public string PrevInputFileName, PrevProfileName, PrevOutputDumpFolderName; //  対象ファイル、プロファイル、出力フォルダ(ダンプ用)の控え
+        static public string PrevInputFileName, PrevProfileName = "", PrevOutputDumpFolderName; //  対象ファイル、プロファイル、出力フォルダ(ダンプ用)の控え
         //  起動時
         public Form1()
         {
@@ -168,43 +168,36 @@ namespace KaniVolatility
                     cmbCommand.Items.Clear();
                     cmbCommand.Text = "";
                 }
+                PrevProfileName = cmbProfile.Text;
                 return;
             }
-            else if (cmbProfile.SelectedItem.ToString().Contains("Linux") == true || cmbProfile.SelectedItem.ToString().Contains("Mac") == true)
+            else if (cmbProfile.SelectedItem.ToString().Contains("Linux") == true || cmbProfile.SelectedItem.ToString().Contains("Mac") == true) // Linux/Mac用
             {
-                // プロファイルが新規または別OSからLinuxまたはMacに変更された場合はカテゴリリストを再作成
-                if (PrevProfileName != "Linux" || PrevProfileName != "Mac")
-                {
-                    chkPlugins.Checked = false;
-                    chkPlugins.Enabled = false;
-                    cmbCategory.Items.Clear();
-                    cmbCategory.Items.AddRange(new object[] {
-                        "プロセス",
-                        "プロセスメモリ",
-                        "カーネルメモリ/オブジェクト",
-                        "ネットワーク",
-                        "マルウェア",
-                        "システム情報",
-                        "その他",
-                        "イメージスキャン/変換",
-                        "バッチ処理"
-                    });
-                    txtCommandLine.Text = "--plugins=profiles --profile=" + cmbProfile.SelectedItem + " -f \"" + txtInput.Text + "\" " + cmbCommand.SelectedItem;
-                    cmbCommand.Items.Clear();
-                    cmbCommand.Text = "";
-                    cmbCategory.Enabled = true;
-                }
-                else
-                {
-                    buildCommandline(sender, e);
-                }
+                chkPlugins.Checked = false;
+                chkPlugins.Enabled = false;
+                cmbCategory.Items.Clear();
+                cmbCategory.Items.AddRange(new object[] {
+                    "プロセス",
+                    "プロセスメモリ",
+                    "カーネルメモリ/オブジェクト",
+                    "ネットワーク",
+                    "マルウェア",
+                    "システム情報",
+                    "その他",
+                    "イメージスキャン/変換",
+                    "コミュニティ",
+                    "バッチ処理"
+                });
+                cmbCommand.Items.Clear();
+                cmbCommand.Text = "";
+                cmbCategory.Enabled = true;
             }
             else // Windows用
             {
                 chkPlugins.Enabled = true;
 
-                // プロファイルが新規に選択された場合は現在の状態を維持しつつカテゴリリストを作成
-                if (PrevProfileName == null)
+                // プロファイルが新規に選択された場合か別OSからWinに変更された場合はカテゴリリストを作成
+                if (PrevProfileName == "" || (PrevProfileName.Contains("Mac") == true || PrevProfileName.Contains("Linux") == true))
                 {
                     cmbCategory.Items.Clear();
                     cmbCategory.Items.AddRange(new object[] {
@@ -223,25 +216,15 @@ namespace KaniVolatility
                     });
                     cmbCategory.SelectedIndex = 9; // イメージスキャン/変換
                 }
-                // プロファイルが別OSからWinに変更された場合はカテゴリリストを再作成
-                else if (PrevProfileName.Contains("Mac") == true || PrevProfileName.Contains("Linux") == true)
-                {
-                    buildCommandline(sender, e);
-                    cmbCommand.Items.Clear();
-                }
-                else
-                {
-                    buildCommandline(sender, e);
-                }
 
                 if (chkPlugins.Checked == false)
                     cmbCategory.Enabled = true;
 
                 chkPlugins.Enabled = true;
-                PrevProfileName = cmbProfile.Text;
 
             }
 
+            PrevProfileName = cmbProfile.Text;
             buildCommandline(sender, e);
         }
 
@@ -539,7 +522,7 @@ namespace KaniVolatility
                 else if ((string)cmbCategory.SelectedItem == "コミュニティ")
                 {
                     cmbCommand.Items.AddRange(new object[] {
-                        "filevault2"
+                        "mac_filevault2"
                     });
                 }
                 else if ((string)cmbCategory.SelectedItem == "バッチ処理")
@@ -1181,7 +1164,7 @@ namespace KaniVolatility
                 if (backgroundWorker2.CancellationPending)
                 {
                     e.Cancel = true;
-                    return;
+                    return; 
                 }
 
                 if (strArg[0].Contains("Linux") || strArg[0].Contains("Mac"))

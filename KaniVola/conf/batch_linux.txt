@@ -67,3 +67,10 @@ linux_sk_buff_cache
 //linux_vma_cache
 //linux_volshell
 //linux_yarascan
+//kstackps
+linux_ffcookies
+linux_ffhis
+linux_python_str_dict_entry
+linux_python_strings
+linux_ssh_keys
+linuxgetprofile

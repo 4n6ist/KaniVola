@@ -68,3 +68,4 @@ mac_trustedbsd
 mac_version
 mac_volshell
 mac_yarascan
+mac_filevault2
