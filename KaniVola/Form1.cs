@@ -928,6 +928,7 @@ namespace KaniVolatility
         {
             try
             {
+                process1.StartInfo.FileName = "volatility.exe";
                 process1.StartInfo.Arguments = txtCommandLine.Text;  // 引数
                 process1.Start();
                 string commandOutputStd, commandErrStd;
@@ -1042,6 +1043,7 @@ namespace KaniVolatility
         // volatitliy.exe実行&標準出力(兼help/info用)
         private void RunVolatilityStdout()
         {
+            process1.StartInfo.FileName = "volatility.exe";
             process1.StartInfo.Arguments = txtCommandLine.Text; // 引数
             process1.Start();
 
@@ -1167,6 +1169,7 @@ namespace KaniVolatility
                     return; 
                 }
 
+                process1.StartInfo.FileName = "volatility.exe";
                 if (strArg[0].Contains("Linux") || strArg[0].Contains("Mac"))
                     process1.StartInfo.Arguments = $"--plugins=profiles;community --profile={strArg[0]} -f \"{strArg[1]}\" {command}";
                 else // Windows
@@ -1222,27 +1225,58 @@ namespace KaniVolatility
             txtStdOutput.ScrollToCaret();
         }
 
-        // ツール > AFF4変換
+        // ツール > AFF4
         private void aff4ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             openFileDialog.Filter = "AFF4形式|*.aff4";
             if (DialogResult.OK == openFileDialog.ShowDialog())
             {
+                process1.StartInfo.FileName = Directory.GetCurrentDirectory() + "\\winpmem.exe";
+                process1.StartInfo.WorkingDirectory = Path.GetDirectoryName(openFileDialog.FileName);
+                process1.StartInfo.Arguments = $"-V {openFileDialog.FileName}";
+                process1.Start();
+                string commandOutputStd, aff4Type;
+                commandOutputStd = process1.StandardOutput.ReadToEnd();
+                if (commandOutputStd.Contains("/PhysicalMemory"))
+                    aff4Type = "Windows";
+                else if (commandOutputStd.Contains("/proc/kcore"))
+                    aff4Type = "Linux";
+                else if (commandOutputStd.Contains("/dev/pmem"))
+                    aff4Type = "OSX";
+                else
+                    aff4Type = "Unknown";
+                process1.WaitForExit(1800000);
 
-                DialogResult result = MessageBox.Show("RAW形式に変換します。変換後のファイルは同じ場所に拡張子をrawにして出力します。", "確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
-                if (result == DialogResult.Yes)
+                if (aff4Type == "Unknown")
+                    MessageBox.Show("winpmem/linpmem/osxpmemいずれかで取得したAFF4形式のファイルを指定してください。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                else
                 {
-                    process2.StartInfo.FileName = Directory.GetCurrentDirectory() + "\\winpmem.exe";
-                    process2.StartInfo.WorkingDirectory = Path.GetDirectoryName(openFileDialog.FileName);
-                    process2.StartInfo.Arguments = $"-e PhysicalMemory -o {Path.GetFileNameWithoutExtension(openFileDialog.FileName)}.raw {openFileDialog.FileName}";
-                    process2.Start();
-                    process2.WaitForExit(1800000);
-                    if (process2.ExitCode == 0)
-                        MessageBox.Show("変換が完了しました。", "完了", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    else
-                        MessageBox.Show("エラーが発生しました。AFF4形式のファイルを指定してください。", "完了", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    cmbCommand.SelectedIndex = 0;
-                    return;
+                    DialogResult result = MessageBox.Show("RAW形式のデータとして抽出します。抽出後のファイルは同じ場所に拡張子をrawにして出力します。", "確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+                    if (result == DialogResult.Yes)
+                    {
+                        process2.StartInfo.FileName = Directory.GetCurrentDirectory() + "\\winpmem.exe";
+                        process2.StartInfo.WorkingDirectory = Path.GetDirectoryName(openFileDialog.FileName);
+                        if (aff4Type == "Windows")
+                            process2.StartInfo.Arguments = $"-e PhysicalMemory -o {Path.GetFileNameWithoutExtension(openFileDialog.FileName)}.raw {openFileDialog.FileName}";
+                        else if (aff4Type == "Linux")
+                            process2.StartInfo.Arguments = $"-e proc/kcore -o {Path.GetFileNameWithoutExtension(openFileDialog.FileName)}.raw {openFileDialog.FileName}";
+                        else if (aff4Type == "OSX")
+                            process2.StartInfo.Arguments = $"-e dev/pmem -o {Path.GetFileNameWithoutExtension(openFileDialog.FileName)}.raw {openFileDialog.FileName}";
+                        else
+                            return;
+                        process2.Start();
+                        process2.WaitForExit(1800000);
+                        txtStdOutput.Text = "> winpmem.exe " + process2.StartInfo.Arguments + "\r\n";
+                        if (process2.ExitCode == 0)
+                            txtStdOutput.Text += "抽出完了\r\n";
+                        else
+                            txtStdOutput.Text += "エラー...上記コマンドを直接実行して結果を確認してください。\r\n";
+                        txtStdOutput.SelectionStart = txtStdOutput.Text.Length;
+                        txtStdOutput.Focus();
+                        txtStdOutput.ScrollToCaret();
+                        cmbCommand.SelectedIndex = 0;
+                        return;
+                    }
                 }
             }
             openFileDialog.Filter = "";

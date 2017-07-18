@@ -410,8 +410,8 @@
             // aff4ToolStripMenuItem
             // 
             this.aff4ToolStripMenuItem.Name = "aff4ToolStripMenuItem";
-            this.aff4ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
-            this.aff4ToolStripMenuItem.Text = "AFF4変換";
+            this.aff4ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.aff4ToolStripMenuItem.Text = "AFF4";
             this.aff4ToolStripMenuItem.Click += new System.EventHandler(this.aff4ToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
@@ -425,7 +425,7 @@
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.aboutToolStripMenuItem.Text = "バージョン情報";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
