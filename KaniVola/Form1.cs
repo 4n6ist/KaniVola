@@ -268,7 +268,8 @@ namespace KaniVolatility
                         "linux_pidhashtable",
                         "linux_psxview",
                         "linux_lsof",
-                        "linux_psenv"
+                        "linux_psenv",
+                        "linux_getcwd"
                     });
                 }
                 else if ((string)cmbCategory.SelectedItem == "プロセスメモリ")
@@ -745,6 +746,7 @@ namespace KaniVolatility
                         "malprocfind",
                         "malthfind",
                         "malsysproc",
+                        "mimikatz",
                         "ndispktscan",
                         "networkpackets",
                         "openvpn",
@@ -798,11 +800,8 @@ namespace KaniVolatility
         {
             string origCommand;
             origCommand = txtCommandLine.Text;
-
-            if ((string)cmbCategory.SelectedItem == "コミュニティ")
-                txtCommandLine.Text = $"--plugins=community {cmbCommand.SelectedItem} -h";
-            else
-                txtCommandLine.Text = $"{cmbCommand.SelectedItem} -h";
+        
+            txtCommandLine.Text = $"{cmbCommand.SelectedItem} -h";
             txtStdOutput.Text = "> volatility.exe " + txtCommandLine.Text + "\r\n";
             RunVolatilityStdout();
             txtCommandLine.Text = origCommand;
@@ -1171,9 +1170,9 @@ namespace KaniVolatility
 
                 process1.StartInfo.FileName = "volatility.exe";
                 if (strArg[0].Contains("Linux") || strArg[0].Contains("Mac"))
-                    process1.StartInfo.Arguments = $"--plugins=profiles;community --profile={strArg[0]} -f \"{strArg[1]}\" {command}";
+                    process1.StartInfo.Arguments = $"--plugins=profiles --profile={strArg[0]} -f \"{strArg[1]}\" {command}";
                 else // Windows
-                    process1.StartInfo.Arguments = $"--plugins=community --profile={strArg[0]} -f \"{strArg[1]}\" {command}";
+                    process1.StartInfo.Arguments = $" --profile={strArg[0]} -f \"{strArg[1]}\" {command}";
 
                 StreamReader dmpFile = new StreamReader(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + @"\conf\dumpcmd.txt", System.Text.Encoding.Default);
                 bool dmpCmd;
@@ -1341,19 +1340,10 @@ namespace KaniVolatility
             {
                 optPlugins = "";
             }
-            else if ( (cmbProfile.SelectedItem.ToString().Contains("Linux") == true || cmbProfile.SelectedItem.ToString().Contains("Mac") == true)
-                && (string)cmbCategory.SelectedItem == "コミュニティ")
-            {
-                optPlugins = $"--plugins=profiles;community";
-            }
             else if (cmbProfile.SelectedItem.ToString().Contains("Linux") == true
                 || cmbProfile.SelectedItem.ToString().Contains("Mac") == true)
             {
                 optPlugins = $"--plugins=profiles";
-            }
-            else if ((string)cmbCategory.SelectedItem == "コミュニティ")
-            {
-                optPlugins = $"--plugins=community";
             }
             else
                 optPlugins = "";
