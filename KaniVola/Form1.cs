@@ -30,8 +30,7 @@ namespace KaniVolatility
             if (!File.Exists("volatility.exe"))
             {
                 MessageBox.Show("volatilityプログラムが存在しません。\r\n\r\n"
-                  + "公式サイト(http://www.volatilityfoundation.org/)からWindowsプログラム(Volatility 2.6 Windows Standalone Executable (x64))を入手してください。\r\n\r\n"
-                  + "入手したファイルのファイル名をvolatility.exeに変更してからKaniVola.exeと同じフォルダに配置し、再度実行してください。",
+                  + "volatility.exeをKaniVola.exeと同じフォルダに配置し、再度実行してください。",
                   "実行エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Environment.Exit(0);
             }
@@ -153,8 +152,8 @@ namespace KaniVolatility
         {
             if (cmbProfile.SelectedItem.ToString() == "Linux/Mac")
             {
-                DialogResult result = MessageBox.Show(this, "KaniVola.exeがある場所にprofilesフォルダを作成してください。\r\n\r\n"
-                  + "そのフォルダ配下に追加対象プロファイル(zip形式)を配置してからOKボタンを押してください。\r\n\r\n"
+                DialogResult result = MessageBox.Show(this, 
+                    "KaniVola.exeと同じ場所にあるprofilesフォルダ配下にプロファイル(zip形式)を配置してからOKボタンを押してください。\r\n\r\n"
                   + "認識したプロファイルを一覧に追加します。",
                   "プロファイルの追加", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
                 if (result == DialogResult.OK)
@@ -237,20 +236,21 @@ namespace KaniVolatility
             {
                 cmbCommand.Items.AddRange(new object[] {
                     "imageinfo",
-                    "kdbgscan",
-                    "kpcrscan",
                     "crashinfo",
                     "hibinfo",
-                    "imagecopy",
-                    "raw2dmp",
-                    "vboxinfo",
-                    "vmwareinfo",
                     "hpakinfo",
                     "hpakextract",
+                    "imagecopy",
+                    "kdbgscan",
+                    "kpcrscan",
                     "limeinfo",
+                    "linuxgetprofile",
                     "mac_get_profile",
                     "machoinfo",
-                    "qemuinfo"
+                    "qemuinfo",
+                    "raw2dmp",
+                    "vboxinfo",
+                    "vmwareinfo"
                 });
                 return;
             }
@@ -261,64 +261,67 @@ namespace KaniVolatility
                 {
                     cmbCommand.Items.AddRange(new object[] {
                         "linux_pslist",
-                        "linux_psscan",
-                        "linux_psaux",
-                        "linux_pstree",
-                        "linux_pslist_cache",
-                        "linux_pidhashtable",
-                        "linux_psxview",
+                        "linux_getcwd",
                         "linux_lsof",
+                        "linux_pidhashtable",
+                        "linux_psaux",
                         "linux_psenv",
-                        "linux_getcwd"
+                        "linux_pslist_cache",
+                        "linux_psscan",
+                        "linux_pstree",
+                        "linux_psxview",
+                        "linux_threads"
                     });
                 }
                 else if ((string)cmbCategory.SelectedItem == "プロセスメモリ")
                 {
                     cmbCommand.Items.AddRange(new object[] {
-                        "linux_memmap",
-                        "linux_proc_maps",
-                        "linux_dump_map",
+                        "linux_procdump",
                         "linux_bash",
                         "linux_bash_env",
                         "linux_bash_hash",
+                        "linux_dump_map",
                         "linux_dynamic_env",
                         "linux_elfs",
                         "linux_library_list",
                         "linux_librarydump",
-                        "linux_proc_maps_rb",
-                        "linux_procdump"
+                        "linux_memmap",
+                        "linux_proc_maps",
+                        "linux_proc_maps_rb"
                     });
                 }
                 else if ((string)cmbCategory.SelectedItem == "カーネルメモリ/オブジェクト")
                 {
                     cmbCommand.Items.AddRange(new object[] {
-                        "linux_lsmod",
-                        "linux_moddump",
-                        "linux_tmpfs",
+                        "linux_dentry_cache",
                         "linux_enumerate_files",
+                        "linux_find_file",
                         "linux_info_regs",
                         "linux_kernel_opened_files",
-                        "linux_recover_filesystem"
+                        "linux_lsmod",
+                        "linux_moddump",
+                        "linux_recover_filesystem",
+                        "linux_tmpfs"
                     });
                 }
                 else if ((string)cmbCategory.SelectedItem == "マルウェア")
                 {
                     cmbCommand.Items.AddRange(new object[] {
+                        "linux_malfind",
+                        "linux_apihooks",
                         "linux_check_afinfo",
-                        "linux_check_tty",
-                        "linux_keyboard_notifiers",
                         "linux_check_creds",
+                        "linux_check_evt_arm",
                         "linux_check_fop",
                         "linux_check_idt",
-                        "linux_check_syscall",
-                        "linux_check_modules",
-                        "linux_apihooks",
-                        "linux_check_evt_arm",
                         "linux_check_inline_kernel",
+                        "linux_check_modules",
+                        "linux_check_syscall",
                         "linux_check_syscall_arm",
+                        "linux_check_tty",
                         "linux_hidden_modules",
+                        "linux_keyboard_notifiers",
                         "linux_ldrmodules",
-                        "linux_malfind",
                         "linux_plthook",
                         "linux_process_hollow"
                     });
@@ -326,29 +329,27 @@ namespace KaniVolatility
                 else if ((string)cmbCategory.SelectedItem == "ネットワーク")
                 {
                     cmbCommand.Items.AddRange(new object[] {
+                        "linux_netscan",
                         "linux_arp",
                         "linux_ifconfig",
-                        "linux_route_cache",
+                        "linux_list_raw",
                         "linux_netstat",
                         "linux_pkt_queues",
-                        "linux_sk_buff_cache",
-                        "linux_list_raw",
-                        "linux_netscan"
+                        "linux_route_cache",
+                        "linux_sk_buff_cache"
                     });
                 }
                 else if ((string)cmbCategory.SelectedItem == "システム情報")
                 {
                     cmbCommand.Items.AddRange(new object[] {
+                        "linux_banner",
                         "linux_cpuinfo",
                         "linux_dmesg",
                         "linux_iomem",
-                        "linux_slabinfo",
                         "linux_mount",
                         "linux_mount_cache",
-                        "linux_dentry_cache",
-                        "linux_find_file",
-                        "linux_vma_cache",
-                        "linux_banner"
+                        "linux_slabinfo",
+                        "linux_vma_cache"
                     });
                 }
                 else if ((string)cmbCategory.SelectedItem == "その他")
@@ -356,20 +357,19 @@ namespace KaniVolatility
                     cmbCommand.Items.AddRange(new object[] {
                         "linux_yarascan",
                         "linux_strings",
-                        "linux_truecrypt_passphrase",
-                        "linux_threads"
+                        "linux_truecrypt_passphrase"
                     });
                 }
                 else if ((string)cmbCategory.SelectedItem == "イメージスキャン/変換")
                 {
                     cmbCommand.Items.AddRange(new object[] {
-                        "imagecopy",
-                        "vboxinfo",
-                        "vmwareinfo",
-                        "hpakinfo",
                         "hpakextract",
+                        "hpakinfo",
+                        "imagecopy",
                         "limeinfo",
-                        "qemuinfo"
+                        "qemuinfo",
+                        "vboxinfo",
+                        "vmwareinfo"
                     });
                 }
                 else if ((string)cmbCategory.SelectedItem == "コミュニティ")
@@ -403,51 +403,54 @@ namespace KaniVolatility
                 {
                     cmbCommand.Items.AddRange(new object[] {
                         "mac_pslist",
-                        "mac_tasks",
-                        "mac_pstree",
+                        "mac_dead_procs",
                         "mac_lsof",
                         "mac_pgrp_hash_table",
                         "mac_pid_hash_table",
                         "mac_psaux",
-                        "mac_dead_procs",
-                        "mac_psxview"
+                        "mac_psenv",
+                        "mac_pstree",
+                        "mac_psxview",
+                        "mac_tasks",
+                        "mac_threads",
+                        "mac_threads_simple"
                     });
                 }
                 else if ((string)cmbCategory.SelectedItem == "プロセスメモリ")
                 {
                     cmbCommand.Items.AddRange(new object[] {
-                        "mac_proc_maps",
-                        "mac_dump_maps",
+                        "mac_procdump",
                         "mac_bash",
                         "mac_bash_env",
                         "mac_bash_hash",
+                        "mac_compressed_swap",
+                        "mac_dump_maps",
+                        "mac_librarydump",
                         "mac_memdump",
-                        "mac_procdump",
-                        "mac_compressed_swap"
+                        "mac_proc_maps"
                     });
                 }
                 else if ((string)cmbCategory.SelectedItem == "カーネルメモリ/オブジェクト")
                 {
                     cmbCommand.Items.AddRange(new object[] {
-                        "mac_list_sessions",
-                        "mac_list_zones",
-                        "mac_lsmod",
-                        "mac_mount",
                         "mac_compressed_swap",
                         "mac_dead_vnodes",
+                        "mac_devfs",
                         "mac_dump_file",
                         "mac_dyld_maps",
+                        "mac_interest_handlers",
+                        "mac_kernel_classes",
+                        "mac_kevents",
                         "mac_list_files",
                         "mac_list_kauth_listeners",
                         "mac_list_kauth_scopes",
+                        "mac_list_sessions",
+                        "mac_list_zones",
+                        "mac_lsmod",
                         "mac_lsmod_iokit",
                         "mac_lsmod_kext_map",
                         "mac_moddump",
                         "mac_recover_filesystem",
-                        "mac_devfs",
-                        "mac_interesr_handlers",
-                        "mac_kernel_classes",
-                        "mac_kevents",
                         "mac_timers",
                         "mac_vfsevents"
                     });
@@ -455,32 +458,33 @@ namespace KaniVolatility
                 else if ((string)cmbCategory.SelectedItem == "ネットワーク")
                 {
                     cmbCommand.Items.AddRange(new object[] {
-                        "mac_arp",
-                        "mac_ifconfig",
                         "mac_netstat",
-                        "mac_route",
+                        "mac_arp",
                         "mac_dead_sockets",
+                        "mac_ifconfig",
                         "mac_list_raw",
                         "mac_network_conns",
+                        "mac_route",
                         "mac_socket_filters"
                     });
                 }
                 else if ((string)cmbCategory.SelectedItem == "マルウェア")
                 {
                     cmbCommand.Items.AddRange(new object[] {
-                        "mac_check_sysctl",
-                        "mac_check_syscalls",
-                        "mac_check_trap_table",
-                        "mac_ip_filters",
-                        "mac_notifiers",
-                        "mac_trustedbsd",
+                        "mac_malfind",
                         "mac_apihooks",
                         "mac_apihooks_kernel",
+                        "mac_check_fop",
                         "mac_check_mig_table",
+                        "mac_check_sysctl",
+                        "mac_check_syscalls",
                         "mac_check_syscall_shadow",
-                        "mac_malfind",
+                        "mac_check_trap_table",
+                        "mac_ip_filters",
+                        "mac_ldrmodules",
+                        "mac_notifiers",
                         "mac_orphan_threads",
-                        "mac_check_fop"
+                        "mac_trustedbsd"
                     });
                 }
                 else if ((string)cmbCategory.SelectedItem == "システム情報")
@@ -489,22 +493,21 @@ namespace KaniVolatility
                         "mac_dmesg",
                         "mac_find_aslr_shift",
                         "mac_machine_info",
-                        "mac_version",
-                        "mac_print_boot_cmdline"
+                        "mac_mount",
+                        "mac_print_boot_cmdline",
+                        "mac_version"
                     });
                 }
                 else if ((string)cmbCategory.SelectedItem == "その他")
                 {
                     cmbCommand.Items.AddRange(new object[] {
-                        "mac_yarascan",
                         "mac_adium",
                         "mac_calendar",
                         "mac_contacts",
                         "mac_keychaindump",
                         "mac_notesapp",
                         "mac_strings",
-                        "mac_threads",
-                        "mac_threads_simple"
+                        "mac_yarascan"
                     });
                 }
                 else if ((string)cmbCategory.SelectedItem == "イメージスキャン/変換")
@@ -523,6 +526,7 @@ namespace KaniVolatility
                 else if ((string)cmbCategory.SelectedItem == "コミュニティ")
                 {
                     cmbCommand.Items.AddRange(new object[] {
+                        "mac_bitcoin",
                         "mac_filevault2"
                     });
                 }
@@ -546,76 +550,77 @@ namespace KaniVolatility
                 {
                     cmbCommand.Items.AddRange(new object[] {
                         "pslist",
-                        "pstree",
-                        "psscan",
-                        "dlllist",
-                        "dlldump",
-                        "handles",
-                        "getsids",
                         "cmdscan",
                         "consoles",
-                        "privs",
+                        "dlldump",
+                        "dlllist",
                         "envars",
+                        "getsids",
+                        "handles",
+                        "privs",
+                        "pstree",
+                        "psscan",
+                        "threads",
                         "verinfo"
                     });
                 }
                 else if ((string)cmbCategory.SelectedItem == "プロセスメモリ")
                 {
                     cmbCommand.Items.AddRange(new object[] {
-                        "memmap",
-                        "memdump",
                         "procdump",
-                        "vadinfo",
-                        "vadwalk",
-                        "vadtree",
-                        "vaddump",
                         "evtlogs",
-                        "iehistory"
+                        "iehistory",
+                        "memdump",
+                        "memmap",
+                        "vadinfo",
+                        "vaddump",
+                        "vadtree",
+                        "vadwalk"
                     });
                 }
                 else if ((string)cmbCategory.SelectedItem == "カーネルメモリ/オブジェクト")
                 {
                     cmbCommand.Items.AddRange(new object[] {
-                        "modules",
-                        "modscan",
-                        "moddump",
-                        "ssdt",
                         "driverscan",
+                        "dumpfiles",
                         "filescan",
+                        "moddump",
+                        "modscan",
+                        "modules",
                         "mutantscan",
+                        "ssdt",
                         "symlinkscan",
                         "thrdscan",
-                        "dumpfiles",
-                        "unloadedmodules",
+                        "unloadedmodules"
                     });
                 }
                 else if ((string)cmbCategory.SelectedItem == "レジストリ")
                 {
                     cmbCommand.Items.AddRange(new object[] {
-                        "hivelist",
-                        "printkey",
-                        "hivedump",
-                        "hashdump",
-                        "lsadump",
-                        "userassist",
-                        "shimcache",
-                        "getservicesids",
-                        "dumpregistry",
                         "amcache",
                         "auditpol",
                         "cachedump",
+                        "dumpregistry",
+                        "getservicesids",
+                        "hashdump",
+                        "hivedump",
+                        "hivelist",
+                        "lsadump",
+                        "printkey",
                         "shellbags",
-                        "shutdowntime"
+                        "shimcache",
+                        "shutdowntime",
+                        "userassist"
                       });
                 }
                 else if ((string)cmbCategory.SelectedItem == "ネットワーク")
                 {
                     cmbCommand.Items.AddRange(new object[] {
+                        "netscan",
                         "connections",
                         "connscan",
                         "sockets",
-                        "sockscan",
-                        "netscan"
+                        "sockscan"
                     });
                 }
                 else if ((string)cmbCategory.SelectedItem == "ファイルシステム")
@@ -629,49 +634,45 @@ namespace KaniVolatility
                 {
                     cmbCommand.Items.AddRange(new object[] {
                         "malfind",
-                        "yarascan",
-                        "svcscan",
-                        "ldrmodules",
-                        "impscan",
                         "apihooks",
-                        "idt",
-                        "gdt",
-                        "threads",
                         "callbacks",
-                        "driverirp",
                         "devicetree",
+                        "driverirp",
+                        "gdt",
+                        "idt",
+                        "impscan",
+                        "ldrmodules",
                         "psxview",
+                        "servicediff",
+                        "svcscan",
                         "timers",
-                        "servicediff"
+                        "yarascan"
                       });
                 }
                 else if ((string)cmbCategory.SelectedItem == "Windows GUI")
                 {
                     cmbCommand.Items.AddRange(new object[] {
-                        "sessions",
-                        "wndscan",
-                        "deskscan",
-                        "atomscan",
                         "atoms",
+                        "atomscan",
                         "clipboard",
+                        "deskscan",
                         "eventhooks",
                         "gahti",
-                        "messagehooks",
-                        "userhandles",
-                        "screenshot",
                         "gditimers",
+                        "messagehooks",
+                        "screenshot",
+                        "sessions",
+                        "userhandles",
                         "windows",
-                        "wintree"
+                        "wintree",
+                        "wndscan"
                     });
                 }
                 else if ((string)cmbCategory.SelectedItem == "その他")
                 {
                     cmbCommand.Items.AddRange(new object[] {
-                        "strings",
-                        "bioskbd",
-                        "patcher",
-                        "timeliner",
                         "bigpools",
+                        "bioskbd",
                         "cmdline",
                         "drivermodule",
                         "dumpcerts",
@@ -680,8 +681,11 @@ namespace KaniVolatility
                         "multiscan",
                         "notepad",
                         "objtypescan",
+                        "patcher",
                         "poolpeek",
                         "pooltracker",
+                        "strings",
+                        "timeliner",
                         "truecryptmaster",
                         "truecryptpassphrase",
                         "truecryptsummary",
@@ -692,17 +696,17 @@ namespace KaniVolatility
                 {
                     cmbCommand.Items.AddRange(new object[] {
                         "imageinfo",
-                        "kdbgscan",
-                        "kpcrscan",
                         "crashinfo",
                         "hibinfo",
-                        "imagecopy",
-                        "raw2dmp",
-                        "vboxinfo",
-                        "vmwareinfo",
                         "hpakinfo",
                         "hpakextract",
-                        "qemuinfo"
+                        "imagecopy",
+                        "kdbgscan",
+                        "kpcrscan",
+                        "qemuinfo",
+                        "raw2dmp",
+                        "vboxinfo",
+                        "vmwareinfo"
                     });
                 }
                 else if ((string)cmbCategory.SelectedItem == "コミュニティ")
@@ -715,16 +719,29 @@ namespace KaniVolatility
                         "autoruns",
                         "bitlocker",
                         "bitlocker10",
+                        "browserhooks",
                         "callstacks",
+                        "chrome_ragamuffin",
+                        "chromecookies",
+                        "chromedownloadchains",
+                        "chromedownloads",
+                        "chromehistory",
+                        "chromesearchterms",
+                        "chromevisits",
                         "darkcometconfigdump",
                         "derusbiconfig",
                         "directoryenumerator",
                         "driverbl",
                         "dyrescan",
+                        "enumfunc",
                         "exhistory",
                         "facebookcontacts",
                         "facebookgrabinfo",
                         "facebookmessages",
+                        "fileitem",
+                        "filescan",
+                        "findevilmem",
+                        "findevilproc",
                         "firefoxcookies",
                         "firefoxdownloads",
                         "firefoxhistory",
@@ -739,16 +756,16 @@ namespace KaniVolatility
                         "indx",
                         "javaratscan",
                         "lastpass",
-                        "linuxgetprofile",
                         "logfile",
                         "malfinddeep",
                         "malfofind",
                         "malprocfind",
-                        "malthfind",
                         "malsysproc",
+                        "malthfind",
                         "mimikatz",
                         "ndispktscan",
                         "networkpackets",
+                        "openioc_scan",
                         "openvpn",
                         "pdblist",
                         "plugxconfig",
@@ -756,14 +773,22 @@ namespace KaniVolatility
                         "prefetchparser",
                         "processbl",
                         "profilescan",
+                        "psempire",
                         "psinfo",
+                        "rdpkeys",
                         "redleavesconfig",
                         "redleavesscan",
+                        "saveconfig",
                         "schtasks",
                         "sdbscanner",
                         "servicebl",
                         "shimcachemem",
+                        "sqlitefind",
+                        "sqlitefindtables",
+                        "ssdeepscan",
                         "systeminfo",
+                        "threadmap",
+                        "trustrecords",
                         "uninstallinfo",
                         "usbstor",
                         "usnjrnl",
@@ -1325,6 +1350,14 @@ namespace KaniVolatility
                 MessageBox.Show(this, "終了しました", "バッチ処理", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 txtStdOutput.Text += "バッチ処理完了 (100%)\r\n";
             }
+        }
+
+        // ヘルプ > ライセンス
+        private void licenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form f = new KaniVola.license();
+            f.ShowDialog(this);
+            f.Dispose();
         }
 
         private void buildCommandline(object sender, EventArgs e)
