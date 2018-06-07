@@ -3,12 +3,17 @@ dumpcerts
 dumpfiles
 dumpregistry
 evtlogs
+hollowfind
 memdump
 moddump
+networkpackets
 notepad
+prefetchparser
 procdump
-truecryptmaster
+psinfo
+rdpkeys
 screenshot
+truecryptmaster
 vaddump
 linux_dump_map
 linux_moddump
@@ -17,6 +22,7 @@ linux_pkt_queues
 linux_procdump
 linux_recover_filesystem
 linux_sk_buff_cache
+linux_ssh_keys
 linux_tmpfs
 mac_adium
 mac_librarydump
@@ -25,9 +31,6 @@ mac_moddump
 mac_notesapp
 mac_procdump
 mac_recover_filesystem
-hollowfind
-networkpackets
-psinfo
 //attributeht
 //bitlocker
 //malfinddeep

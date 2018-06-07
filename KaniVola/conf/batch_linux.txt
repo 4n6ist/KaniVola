@@ -3,9 +3,14 @@ linux_banner
 linux_bash
 linux_bash_env
 linux_bash_hash
+linux_cpuinfo
 linux_dentry_cache
 linux_dmesg
-linux_find_file -l
+linux_ffcookies
+linux_ffhis
+linux_find_file -L
+linux_ifconfig
+linux_kernel_opened_files
 linux_ldrmodules
 linux_library_list
 linux_list_raw
@@ -14,6 +19,7 @@ linux_lsof
 linux_mount
 linux_mount_cache
 linux_netscan
+linux_netstat
 linux_pidhashtable
 linux_procdump
 linux_psaux
@@ -22,8 +28,12 @@ linux_pslist
 linux_pslist_cache
 linux_pstree
 linux_psxview
+linux_python_str_dict_entry
+linux_python_strings
 linux_route_cache
 linux_sk_buff_cache
+linux_ssh_keys
+//kstackps
 //linux_apihooks
 //linux_check_afinfo
 //linux_check_creds
@@ -35,24 +45,20 @@ linux_sk_buff_cache
 //linux_check_syscall
 //linux_check_syscall_arm
 //linux_check_tty
-//linux_cpuinfo
 //linux_dump_map
 //linux_dynamic_env
 //linux_elfs
 //linux_enumerate_files
 //linux_getcwd
 //linux_hidden_modules
-//linux_ifconfig
 //linux_info_regs
 //linux_iomem
-//linux_kernel_opened_files
 //linux_keyboard_notifiers
 //linux_librarydump
 //linux_malfind
 //linux_memmap
 //linux_moddump
 //linux_netfilter
-//linux_netstat
 //linux_pkt_queues
 //linux_plthook
 //linux_proc_maps
@@ -65,12 +71,4 @@ linux_sk_buff_cache
 //linux_tmpfs
 //linux_truecrypt_passphrase
 //linux_vma_cache
-//linux_volshell
 //linux_yarascan
-//kstackps
-linux_ffcookies
-linux_ffhis
-linux_python_str_dict_entry
-linux_python_strings
-linux_ssh_keys
-linuxgetprofile

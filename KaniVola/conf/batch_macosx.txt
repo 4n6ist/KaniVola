@@ -4,6 +4,7 @@ mac_dead_procs
 mac_dead_sockets
 mac_dead_vnodes
 mac_dmesg
+mac_filevault2
 mac_get_profile
 mac_ifconfig
 mac_ip_filters
@@ -30,6 +31,7 @@ mac_psenv
 mac_pslist
 mac_pstree
 mac_psxview
+mac_recover_filesystem
 mac_route
 mac_socket_filters
 mac_tasks
@@ -39,6 +41,7 @@ mac_version
 //mac_apihooks_kernel
 //mac_bash_env
 //mac_bash_hash
+//mac_bitcoin
 //mac_calendar
 //mac_check_mig_table
 //mac_check_syscall_shadow
@@ -61,11 +64,8 @@ mac_version
 //mac_notifiers
 //mac_orphan_threads
 //mac_proc_maps
-//mac_recover_filesystem
 //mac_strings
 //mac_threads
 //mac_threads_simple
 //mac_trustedbsd
-//mac_volshell
 //mac_yarascan
-mac_filevault2
