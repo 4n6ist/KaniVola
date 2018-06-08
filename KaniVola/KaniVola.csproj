@@ -186,6 +186,10 @@
   <PropertyGroup>
     <PostBuildEvent>mkdir $(TargetDir)conf\
 copy $(ProjectDir)conf\* $(TargetDir)conf
+mkdir $(TargetDir)conf\IOCs
+copy $(ProjectDir)conf\IOCs\* $(TargetDir)conf\IOCs
+mkdir $(TargetDir)conf\PyIOCe_templates
+copy $(ProjectDir)conf\PyIOCe\* $(TargetDir)conf\PyIOCe
 copy $(ProjectDir)winpmem.exe $(TargetDir)
 copy $(ProjectDir)volatility.exe $(TargetDir)
 copy $(ProjectDir)MSCompression64.dll $(TargetDir)
